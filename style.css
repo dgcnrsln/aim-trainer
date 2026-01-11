@@ -1,0 +1,327 @@
+:root {
+    --bg-color: #0f1923;
+    /* Valo Dark Blue */
+    --panel-bg: #ece8e1;
+    /* Valo White/Beige */
+    --text-dark: #0f1923;
+    --text-light: #ece8e1;
+    --accent: #ff4655;
+    /* Valo Red */
+    --accent-dark: #cc3744;
+    --highlight: #00f0ff;
+    /* Cyan helper */
+
+    --font-head: 'Teko', sans-serif;
+    --font-ui: 'Rajdhani', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+    /* Hide default cursor globally, we utilize custom crosshair */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    font-family: var(--font-ui);
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+/* --- CROSSHAIR --- */
+#crosshair {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    /* Simple Cross shape */
+    background: transparent;
+}
+
+#crosshair::before,
+#crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--highlight);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#crosshair::before {
+    width: 2px;
+    height: 16px;
+}
+
+/* Vertical */
+#crosshair::after {
+    width: 16px;
+    height: 2px;
+}
+
+/* Horizontal */
+
+/* --- SCREENS --- */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1f2731 0%, #0f1923 100%);
+    z-index: 10;
+    transition: opacity 0.2s;
+}
+
+.screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* --- PANELS --- */
+.panel {
+    background: rgba(15, 25, 35, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    width: 600px;
+    max-width: 90%;
+    position: relative;
+    /* Stylized borders */
+    border-left: 4px solid var(--accent);
+}
+
+h1 {
+    font-family: var(--font-head);
+    font-size: 5rem;
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+    letter-spacing: 2px;
+}
+
+/* Settings Grid */
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.label {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.select-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    flex: 1;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.select-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.select-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+/* Info Bar */
+.info-bar {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 2px solid var(--highlight);
+}
+
+.info-value {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    color: var(--highlight);
+}
+
+/* CTA Buttons */
+.cta-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--font-head);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    cursor: none;
+    /* Pointer handled by JS/CSS cursor */
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+    transition: transform 0.1s, background 0.2s;
+}
+
+.cta-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+.cta-btn.small {
+    width: 48%;
+    display: inline-block;
+}
+
+.cta-btn.outline {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.cta-btn.outline:hover {
+    background: rgba(255, 70, 85, 0.1);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* --- GAME HUD --- */
+.hud-top {
+    position: absolute;
+    top: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.hud-stat {
+    text-align: center;
+}
+
+.hud-label {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+}
+
+.hud-value {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    line-height: 0.9;
+}
+
+#timer-display {
+    color: var(--text-light);
+}
+
+#score-display {
+    color: var(--accent);
+}
+
+#acc-display {
+    color: var(--highlight);
+}
+
+/* --- GAME AREA --- */
+#game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.target {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 70, 85, 0.2);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    /* FPS style target often has a solid center dot */
+}
+
+.target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    background: var(--accent);
+    border-radius: 50%;
+}
+
+/* Stats Grid on End Screen */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    text-align: center;
+}
+
+.big-value {
+    font-family: var(--font-head);
+    font-size: 4rem;
+    color: var(--text-light);
+}
+
+.stat-row {
+    grid-column: span 2;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Footer Signature */
+.footer-sig {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.4;
+    letter-spacing: 1px;
+    pointer-events: none;
+}

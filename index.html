@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim Trainer</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CUSTOM CROSSHAIR -->
+    <div id="crosshair"></div>
+
+    <!-- START SCREEN -->
+    <div id="start-screen" class="screen">
+        <div class="panel">
+            <h1 class="glitch" data-text="AIM TRAINER">AIM TRAINER</h1>
+
+            <div class="settings-grid">
+                <!-- TIME SELECTION -->
+                <div class="setting-group">
+                    <p class="label">DURATION</p>
+                    <div class="btn-group" id="time-select">
+                        <button class="select-btn" data-value="30">30s</button>
+                        <button class="select-btn active" data-value="60">60s</button>
+                        <button class="select-btn" data-value="90">90s</button>
+                    </div>
+                </div>
+
+                <!-- DIFFICULTY SELECTION -->
+                <div class="setting-group">
+                    <p class="label">DIFFICULTY</p>
+                    <div class="btn-group" id="diff-select">
+                        <button class="select-btn" data-value="easy">EASY</button>
+                        <button class="select-btn active" data-value="medium">NORMAL</button>
+                        <button class="select-btn" data-value="hard">HARD</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HIGH SCORE DISPLAY -->
+            <div class="info-bar">
+                <span class="info-label">HIGH SCORE (<span id="mode-label">60</span>s):</span>
+                <span id="highscore-display" class="info-value">0</span>
+            </div>
+
+            <button id="start-btn" class="cta-btn">DEPLOY</button>
+
+            <!-- FOOTER -->
+            <div class="footer-sig">
+                Crafted with Antigravity by Doğucan Arslan · 2026
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-screen" class="screen hidden">
+        <!-- HUD -->
+        <div class="hud-top">
+            <div class="hud-stat">
+                <span class="hud-label">TIME</span>
+                <span id="timer-display" class="hud-value">60</span>
+            </div>
+            <div class="hud-stat">
+                <span class="hud-label">SCORE</span>
+                <span id="score-display" class="hud-value">0</span>
+            </div>
+            <div class="hud-stat">
+                <span class="hud-label">ACCURACY</span>
+                <span id="acc-display" class="hud-value">100%</span>
+            </div>
+        </div>
+
+        <div id="game-container">
+            <!-- Targets spawn here -->
+        </div>
+    </div>
+
+    <!-- END SCREEN -->
+    <div id="end-screen" class="screen hidden">
+        <div class="panel">
+            <h1 id="end-title">SESSION COMPLETE</h1>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p class="label">FINAL SCORE</p>
+                    <p id="final-score" class="big-value">0</p>
+                </div>
+                <div class="stat-box">
+                    <p class="label">ACCURACY</p>
+                    <p id="final-acc" class="big-value">0%</p>
+                </div>
+                <div class="stat-row">
+                    <span>HITS: <b id="final-hits">0</b></span>
+                    <span>MISSES: <b id="final-misses">0</b></span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="restart-btn" class="cta-btn small">RESTART</button>
+                <button id="menu-btn" class="cta-btn small outline">MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
